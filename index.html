@@ -15,68 +15,730 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kazi Sakib Hasan</title>
-<link rel="stylesheet" href="style.css">
 <link rel="icon" href="assets/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-subtle: #f1f5f9;
+    --text: #0f172a;
+    --text-secondary: #334155;
+    --muted: #64748b;
+    --accent: #1d4ed8;
+    --accent-soft: #eff6ff;
+    --accent-border: #bfdbfe;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 14px rgba(15, 23, 42, 0.03);
+    --shadow-hover: 0 6px 20px rgba(15, 23, 42, 0.08);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b1120;
+      --surface: #111827;
+      --surface-subtle: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-soft: rgba(59, 130, 246, 0.12);
+      --accent-border: rgba(96, 165, 250, 0.28);
+      --border: #1f2937;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.18s ease, opacity 0.18s ease;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* Header / Hero */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 44px 0 36px;
+  }
+
+  .hero-layout {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .avatar {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-border);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+  }
+
+  .hero-text h1 {
+    margin: 0;
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    margin: 6px 0 16px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.18s ease;
+  }
+
+  .links a:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    transform: translateY(-1px);
+  }
+
+  /* Sticky Navigation */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-inner a {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .nav-inner a:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
+    text-decoration: none;
+  }
+
+  /* Main Layout */
+  main {
+    padding-top: 34px;
+    padding-bottom: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+  }
+
+  section {
+    scroll-margin-top: 72px;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--accent);
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 22px 0 12px;
+    color: var(--text);
+  }
+
+  h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 16px 0 8px;
+  }
+
+  p {
+    margin: 0 0 10px;
+    color: var(--text-secondary);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-secondary);
+  }
+
+  li {
+    margin-bottom: 7px;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Shared Card & Grid Primitives */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-border);
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .span-2 {
+    grid-column: 1 / -1;
+  }
+
+  /* Summary */
+  .summary-card {
+    border-left: 4px solid var(--accent);
+    font-size: 1rem;
+  }
+
+  .summary-card p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  /* Research & Publications */
+  .pub-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pub-card {
+    padding: 20px 24px;
+  }
+
+  .pub-title {
+    font-size: 1.04rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .pub-venue {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .pub-meta {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.92rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pub-meta li {
+    margin: 0;
+    word-break: break-word;
+  }
+
+  .pub-credit {
+    margin-top: 6px !important;
+    padding: 10px 12px;
+    background: var(--surface-subtle);
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+
+  .funded-block {
+    margin-top: 28px;
+  }
+
+  .funded-block h3 {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* Patents & Thesis Split */
+  .highlight-card h3 {
+    margin-top: 0;
+    font-size: 1.02rem;
+  }
+
+  /* Selected Projects */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .project-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-title {
+    margin: 0;
+    font-size: 1.04rem;
+    color: var(--text);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .project-links a {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .project-links a:hover {
+    opacity: 0.85;
+  }
+
+  .project-card ul {
+    padding-left: 18px;
+    font-size: 0.93rem;
+  }
+
+  /* Work Experience Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -23px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent-border);
+  }
+
+  .role-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .role-company {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.04rem;
+  }
+
+  .role-meta {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .subrole-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .subrole-box {
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+
+  .subrole-box h4 {
+    margin-top: 0;
+  }
+
+  .subrole-box ul {
+    font-size: 0.91rem;
+  }
+
+  /* Awards Grid */
+  .awards-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .award-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    margin: 0;
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+  }
+
+  .award-card > strong:first-child {
+    display: block;
+    color: var(--text);
+    font-size: 0.98rem;
+    margin-bottom: 6px;
+  }
+
+  .reviewer-list {
+    margin-top: 10px;
+    padding-left: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .reviewer-list li {
+    margin: 0;
+    padding: 8px 12px;
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+  }
+
+  /* Educational Resources */
+  .edu-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .edu-list li {
+    margin: 0;
+  }
+
+  .edu-note {
+    grid-column: 1 / -1;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 10px 14px;
+    background: var(--surface-subtle);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border);
+  }
+
+  .edu-links {
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  /* Technical Skills */
+  .skills-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .skills-grid li {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+  }
+
+  .skills-grid li strong {
+    display: block;
+    color: var(--accent);
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+  }
+
+  #skills-declaration {
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+  }
+
+  #skills-declaration h3 {
+    margin: 0 0 6px;
+    font-size: 0.94rem;
+    color: var(--text);
+  }
+
+  #skills-declaration p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* Education & Contact Bottom Row */
+  .contact-note {
+    list-style: none;
+    padding: 10px 14px;
+    margin: 14px 0 0;
+    background: var(--surface-subtle);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .contact-note li {
+    margin: 0;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 24px 0;
+    text-align: center;
+  }
+
+  footer p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 820px) {
+    .grid-2,
+    .subrole-grid,
+    .awards-grid,
+    .reviewer-list,
+    .edu-list,
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .span-2 {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-layout {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .links {
+      justify-content: center;
+    }
+
+    .timeline {
+      padding-left: 18px;
+    }
+
+    .timeline-item::before {
+      left: -17px;
+    }
+
+    .card {
+      padding: 18px;
+    }
+  }
+
+  @media print {
+    .top-nav {
+      display: none;
+    }
+    body {
+      background: #fff;
+      color: #000;
+    }
+    .card, .award-card, .skills-grid li {
+      box-shadow: none;
+      break-inside: avoid;
+    }
+  }
+</style>
 </head>
 <body>
+
 <header>
-    <div class="container">
-        <h1>Kazi Sakib Hasan</h1>
-        <p class="subtitle">Machine Learning Researcher</p>
-        <div class="links">
-            <a href="mailto:simanto.alt@gmail.com">Email</a>
-            <a href="https://orcid.org/0009-0003-3646-1204" target="_blank">ORCiD</a>
-            <a href="https://github.com/SakibHasanSimanto" target="_blank">GitHub</a>
-            <a href="https://scholar.google.com/citations?user=OuAi-swAAAAJ&hl=en" target="_blank">Google Scholar</a>
-            <a href="https://medium.com/@KaziSakibHasan" target="_blank">Medium</a>
+    <div class="container hero-layout">
+        <img src="assets/profile.jpg" alt="Kazi Sakib Hasan" class="avatar" onerror="this.style.display='none'">
+        <div class="hero-text">
+            <h1>Kazi Sakib Hasan</h1>
+            <p class="subtitle">Machine Learning Researcher</p>
+            <div class="links">
+                <a href="mailto:simanto.alt@gmail.com">Email</a>
+                <a href="https://orcid.org/0009-0003-3646-1204" target="_blank">ORCiD</a>
+                <a href="https://github.com/SakibHasanSimanto" target="_blank">GitHub</a>
+                <a href="https://scholar.google.com/citations?user=OuAi-swAAAAJ&hl=en" target="_blank">Google Scholar</a>
+                <a href="https://medium.com/@KaziSakibHasan" target="_blank">Medium</a>
+            </div>
         </div>
     </div>
 </header>
+
+<nav class="top-nav" aria-label="Section navigation">
+    <div class="container nav-inner">
+        <a href="#summary">Summary</a>
+        <a href="#research">Research</a>
+        <a href="#patents">Patents</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#awards">Awards</a>
+        <a href="#educational">Educational Resources</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
 
 <main class="container">
 
 <!-- Professional Summary -->
 <section id="summary">
     <h2>Professional Summary</h2>
-    <p>
-    Machine Learning (ML) researcher specializing in data science, trustworthy ML, and efficient AI systems. Experienced in industry AI R&D through Japan’s government-funded program in collaboration with Chowa Giken Corporation. Contributed to the development of a technology based on 3-dimensional data, which has since been filed for patent protection with the Japan Patent Office (JPO). Continued collaboration with Chowa Giken Corporation as an ML Research Engineer Intern, supporting applied AI research, experimentation, and evaluation for industry projects. Lead researcher of peer-reviewed publications in biomedical ML, including papers in PLOS One and Scientific Reports. Served as a peer reviewer for multiple Q1/Q2 journals and as an instructor for the Asia-Pacific Olympiad in AI (APOAI) 2026.
-    </p>
-</section>
-
-
-<!-- Work Experience -->
-<section id="experience">
-    <h2>Work Experience</h2>
-    <p><strong style="color: blue;">Chowa Giken Corporation, Department of R&D</strong>, Japan (Remote/OJT)<br>
-       <em><span style="color: blue;">AI Engineering Trainee | Sep 2025 – Jan 2026</span></em>
-    <ul>
-        <li>Selected for the government-funded Japanese OJT AI Training Program, <strong>Nippon AI Dojo 2025</strong> (<strong>2.6% acceptance rate</strong>) — <a href="https://www.bracu.ac.bd/news/brac-university-collaborates-japan-ai-training-program">[Official News]</a>.</li>
-        <li>Worked on an industry client project involving estimation of a target variable from 3D vision data, gaining hands-on experience in applied AI R&D workflows, including problem analysis, model development, experimentation, and evaluation.</li>
-        <li>Collaborated with a team of trainees in an industry-oriented AI development environment; received <strong>top recognition</strong> in both interim and final project report presentations.</li> 
-        <li>Gained practical exposure to industrial AI development processes, including technical investigation, AI model licensing, data security, and communicating experimental results to R&D stakeholders.</li>
-    </ul>
-
-    <p><strong style="color: blue;">Chowa Giken Corporation, Department of R&D</strong>, Japan (Remote Job)<br>
-      <em><span style="color: blue;">ML Research Engineer Intern | June 2026 – Jan 2027</span></em>
-        
-    <h4>Government-funded Project</h4>    
-    <ul>
-      
-      <li> <strong>Support Mentor (Teaching Assistant)</strong> for Nippon AI Dojo 2026 (AI Human Resource Development Program), subsidized by the Ministry of Economy, Trade and Industry (METI, JAPAN).</li>
-      <li> Mentoring trainees by providing technical guidance, reviewing assignments, and supporting hands-on machine learning projects. </li>  
-    </ul>
-
-    <h4>Client Project</h4> 
-    <ul>
-    <li>Role involves Applied AI R&D responsibilities, including developing machine learning models, conducting experimental evaluations, optimizing model performance, and collaborating on real-world AI solutions.</li>
-    <li>Project 1: Involving data manipulation, sample size calculation and operations research, feature engineering, and statistical modeling tasks for a racehorse breeding farm.</li>
-    </ul>
-
-    <h4>Corporate Training</h4> 
-    <ul>
-        <li>Enrolled in a course titled "Business Skills for New Professionals" by GLOBIS Unlimited, a premium business e-learning platform powered directly by the curriculum of <strong>GLOBIS University</strong> (Japan's largest and top-ranked business school). </li>
-        <li>Acquired business foundations including logical thinking, structured business writing, and effective professional communication tailored for the corporate ecosystem.</li>
-    </ul>
+    <div class="card summary-card">
+        <p>
+        Machine Learning (ML) researcher specializing in data science, trustworthy ML, and efficient AI systems. Experienced in industry AI R&D through Japan’s government-funded program in collaboration with Chowa Giken Corporation. Contributed to the development of a technology based on 3-dimensional data, which has since been filed for patent protection with the Japan Patent Office (JPO). Continued collaboration with Chowa Giken Corporation as an ML Research Engineer Intern, supporting applied AI research, experimentation, and evaluation for industry projects. Lead researcher of peer-reviewed publications in biomedical ML, including papers in PLOS One and Scientific Reports. Served as a peer reviewer for multiple Q1/Q2 journals and as an instructor for the Asia-Pacific Olympiad in AI (APOAI) 2026.
+        </p>
+    </div>
 </section>
 
 <!-- Research Publications -->
@@ -85,100 +747,246 @@
     <h2>Research Publications</h2>
 
     <h3>Journal</h3>
-    <p><strong>Advancing Cardiovascular Disease Diagnosis with Responsible AI Framework</strong> <br> 
-       <em>Published: Scientific Reports (Nature Portfolio). Indexing: Web of Science, SCOPUS, MedLine</em></p> 
-       
-    <ul>
-        <li>Authors: Kazi Sakib Hasan (Corresponding), Irfan Sadi Dhrubo</li>
-        <li>DOI: https://doi.org/10.1038/s41598-026-35451-3</li>
-        <li>Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft, Writing - review and editing</li>
+    <div class="pub-stack">
+        <div class="card pub-card">
+            <p class="pub-title"><strong>Advancing Cardiovascular Disease Diagnosis with Responsible AI Framework</strong></p>
+            <em class="pub-venue">Published: Scientific Reports (Nature Portfolio). Indexing: Web of Science, SCOPUS, MedLine</em>
+            <ul class="pub-meta">
+                <li>Authors: Kazi Sakib Hasan (Corresponding), Irfan Sadi Dhrubo</li>
+                <li>DOI: <a href="https://doi.org/10.1038/s41598-026-35451-3" target="_blank">https://doi.org/10.1038/s41598-026-35451-3</a></li>
+                <li class="pub-credit">Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft, Writing - review and editing</li>
+            </ul>
+        </div>
 
-    </ul>
-
-    <p><strong>Gradient Boosting Models for Gallstone Disease Classification: A Comparative Study Using Demographic and Clinical Data</strong></p>
-        <em>Published: PLOS One. Indexing: Web of Science, SCOPUS, Medline. </em>
-    <ul>
-        
-        <li>Authors: Kazi Sakib Hasan (Corresponding Author), Sumaiya Hossain Puspita</li>
-        <li>DOI: https://doi.org/10.1371/journal.pone.0361572</li>
-        <li>Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft, Writing - review and editing</li>
-    </ul>
+        <div class="card pub-card">
+            <p class="pub-title"><strong>Gradient Boosting Models for Gallstone Disease Classification: A Comparative Study Using Demographic and Clinical Data</strong></p>
+            <em class="pub-venue">Published: PLOS One. Indexing: Web of Science, SCOPUS, Medline. </em>
+            <ul class="pub-meta">
+                <li>Authors: Kazi Sakib Hasan (Corresponding Author), Sumaiya Hossain Puspita</li>
+                <li>DOI: <a href="https://doi.org/10.1371/journal.pone.0361572" target="_blank">https://doi.org/10.1371/journal.pone.0361572</a></li>
+                <li class="pub-credit">Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft, Writing - review and editing</li>
+            </ul>
+        </div>
+    </div>
 
     <h3>Conference</h3>
-    <p><strong>BE-KNN: An Efficient Extension of k-Nearest Neighbors via Stable and Deterministic Ensemble Learning</strong> <br>
-       <em>Published: 2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN). Major Indexing: SCOPUS</em></p>
-    <ul>
-        <li>DOI: https://doi.org/10.1109/QPAIN69676.2026.11546650</li>
-        <li>Authors: Kazi Sakib Hasan, Mohammed Montasir Abdullah</li> 
-        <li>Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Investigation, Methodology, Software, Writing - original draft</li>
-        <li><strong>Highlights</strong>: Supervised Epoch One AI Research Unit.</li>
-        
-    </ul>
+    <div class="pub-stack">
+        <div class="card pub-card">
+            <p class="pub-title"><strong>BE-KNN: An Efficient Extension of k-Nearest Neighbors via Stable and Deterministic Ensemble Learning</strong></p>
+            <em class="pub-venue">Published: 2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN). Major Indexing: SCOPUS</em>
+            <ul class="pub-meta">
+                <li>DOI: <a href="https://doi.org/10.1109/QPAIN69676.2026.11546650" target="_blank">https://doi.org/10.1109/QPAIN69676.2026.11546650</a></li>
+                <li>Authors: Kazi Sakib Hasan, Mohammed Montasir Abdullah</li> 
+                <li class="pub-credit">Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Investigation, Methodology, Software, Writing - original draft</li>
+                <li><strong>Highlights</strong>: Supervised Epoch One AI Research Unit.</li>
+            </ul>
+        </div>
 
-    <p><strong>Distinguishing Mainshocks from Foreshocks Using Spatiotemporal Labeling and Interpretable Ensemble Learning</strong> <br>
-       <em>Published: 2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN). Major Indexing: SCOPUS</em></p>
-    <ul>
-        <li>DOI: https://doi.org/10.1109/QPAIN69676.2026.11546104</li>
-        <li>Authors: Kazi Sakib Hasan, Most. Afia Anjum Borsha, Faiyaz Bin Zaman, Azra Humayra Alam Prova, Mahir Hasan Chowdhury</li>
-        <li>Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Methodology, Writing - review and editing</li> 
-        <li><strong>Highlights</strong>: Supervised Epoch One AI Research Unit.</li>
-        
-    </ul>
+        <div class="card pub-card">
+            <p class="pub-title"><strong>Distinguishing Mainshocks from Foreshocks Using Spatiotemporal Labeling and Interpretable Ensemble Learning</strong></p>
+            <em class="pub-venue">Published: 2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN). Major Indexing: SCOPUS</em>
+            <ul class="pub-meta">
+                <li>DOI: <a href="https://doi.org/10.1109/QPAIN69676.2026.11546104" target="_blank">https://doi.org/10.1109/QPAIN69676.2026.11546104</a></li>
+                <li>Authors: Kazi Sakib Hasan, Most. Afia Anjum Borsha, Faiyaz Bin Zaman, Azra Humayra Alam Prova, Mahir Hasan Chowdhury</li>
+                <li class="pub-credit">Contributor Role Taxonomy (CRediT): Supervision, Conceptualization, Methodology, Writing - review and editing</li> 
+                <li><strong>Highlights</strong>: Supervised Epoch One AI Research Unit.</li>
+            </ul>
+        </div>
+    </div>
 
-    <h2>Funded Research Projects</h2>
-    <h3>Deanship of Scientific Research, Indexed Publications Program, King Abdulaziz University</h3> 
-    <strong>CPU-Efficient and Low-Carbon ML for Pneumonia Detection on Chest X-Rays</strong>
-    <ul>
-        <li>Authors: Kazi Sakib Hasan, Dr. Muhammad Mostafa Monowar (PI), Dr. Md Rashedul Islam, Dr. Saim Rasheed, Dr. Md. Abdul Hamid, </li> 
-        <li>Project Timeline: 2026-Current</li> 
-        <li>Contributor Role Taxonomy (CRediT): Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft</li>
-    </ul>
-
-</section>
-
-<section id="patents">
-
-    <h2>Patents & Inventions</h2>
-
-    <h3>An Information Processing System / AI — Proposed Main Inventor (Contributon Rate: 90%)</h3>
-    <p>
-        <strong>Assignee:</strong> Chowa Giken Corporation, Japan | 2026
-    </p>
-
-    <ul>
-        <li>Details withheld due to legal and confidentiality restrictions.</li>
-        <li><strong>Internal Review:</strong> The invention underwent technical and management review by Chowa Giken Corporation’s R&D team and leadership.</li>
-        <li><strong>Current Status:</strong> Application filed in Japan Patent Office (JPO).</li>
-    </ul>
+    <div class="funded-block">
+        <h2>Funded Research Projects</h2>
+        <div class="card pub-card">
+            <h3>Deanship of Scientific Research, Indexed Publications Program, King Abdulaziz University</h3> 
+            <p class="pub-title"><strong>CPU-Efficient and Low-Carbon ML for Pneumonia Detection on Chest X-Rays</strong></p>
+            <ul class="pub-meta">
+                <li>Authors: Kazi Sakib Hasan, Dr. Muhammad Mostafa Monowar (PI), Dr. Md Rashedul Islam, Dr. Saim Rasheed, Dr. Md. Abdul Hamid, </li> 
+                <li>Project Timeline: 2026-Current</li> 
+                <li class="pub-credit">Contributor Role Taxonomy (CRediT): Conceptualization, Formal Analysis, Investigation, Methodology, Software, Writing - original draft</li>
+            </ul>
+        </div>
+    </div>
 
 </section>
 
+<!-- Patents & Thesis Row -->
+<div class="grid-2">
+    <section id="patents">
+        <h2>Patents & Inventions</h2>
+        <div class="card highlight-card">
+            <h3>An Information Processing System / AI — Proposed Main Inventor (Contributon Rate: 90%)</h3>
+            <p>
+                <strong>Assignee:</strong> Chowa Giken Corporation, Japan | 2026
+            </p>
+            <ul>
+                <li>Details withheld due to legal and confidentiality restrictions.</li>
+                <li><strong>Internal Review:</strong> The invention underwent technical and management review by Chowa Giken Corporation’s R&D team and leadership.</li>
+                <li><strong>Current Status:</strong> Application filed in Japan Patent Office (JPO).</li>
+            </ul>
+        </div>
+    </section>
 
+    <!-- Current Major Works -->
+    <section id="current">
+        <h2>Undergraduate Thesis</h2>
+        <div class="card highlight-card">
+            <ul>
+                <li>Developed SABA-Net, a lightweight vision model designed to reduce training energy consumption and associated CO₂ emissions compared with pre-training-based architectures.</li>
+                <li>Designed SABA-Net for CPU-based deployment, with a focus on Sustainable and Green AI. </li>
+                <li>[Working Paper Available Upon Request]</li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<!-- Selected Projects -->
+<section id="projects">
+    <h2>Selected Projects</h2>
+    <div class="grid-2">
+        <div class="card project-card">
+            <div class="project-head">
+                <p class="project-title"><strong>Unbiased Journal Comparator Chatbot</strong></p>
+                <div class="project-links">
+                    <a href="https://unbiased-research-comparator.streamlit.app/" target="_blank">[Live Demo]</a>
+                </div>
+            </div>
+            <ul>
+                <li>AI system comparing research papers via Llama3 and DeepSeek R1, ignoring author reputation bias.</li>
+            </ul>
+        </div>
+
+        <div class="card project-card">
+            <div class="project-head">
+                <p class="project-title"><strong>JusticeNetBD</strong></p>
+                <div class="project-links">
+                    <a href="https://justice-net-bd.streamlit.app/" target="_blank">[Live Demo]</a>
+                    <a href="http://dx.doi.org/10.2139/ssrn.5336711" target="_blank">[SSRN Preprint]</a>
+                </div>
+            </div>
+            <ul>
+                <li>Context-aware AI to enhance legal information access for Bangladeshi women via RAG.</li>
+            </ul>
+        </div>
+
+        <div class="card project-card">
+            <div class="project-head">
+                <p class="project-title"><strong>Advanced AQI Forecasting System</strong></p>
+                <div class="project-links">
+                    <a href="https://future-aqi-forecasting-system.streamlit.app/" target="_blank">[Live Demo]</a>
+                </div>
+            </div>
+            <ul>
+                <li>6-hour forward-looking air quality predictor with explainable AI (SHAP) capabilities.</li>
+            </ul>
+        </div>
+
+        <div class="card project-card">
+            <div class="project-head">
+                <p class="project-title"><strong>Lung Cancer Prognosis System (Bengali UI)</strong></p>
+                <div class="project-links">
+                    <a href="https://lung-cancer-predictor-random-forest-model.streamlit.app/" target="_blank">[Live Demo]</a>
+                </div>
+            </div>
+            <ul>
+                <li>Accessibility-focused ML prediction system designed for Bengali-speaking users.</li>
+            </ul>
+        </div>
+
+        <div class="card project-card span-2">
+            <div class="project-head">
+                <p class="project-title"><strong>Warning System for Harassment</strong></p>
+                <div class="project-links">
+                    <a href="https://lgboost-women-safety-predictor.streamlit.app/" target="_blank">[Live Demo]</a>
+                </div>
+            </div>
+            <ul>
+                <li>Prototype safety risk classifier using synthetic data generation and SHAP for model interpretation.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Work Experience -->
+<section id="experience">
+    <h2>Work Experience</h2>
+    <div class="timeline">
+        <div class="card timeline-item">
+            <div class="role-header">
+                <span class="role-company">Chowa Giken Corporation, Department of R&D</span>, Japan (Remote/OJT)
+                <em class="role-meta">AI Engineering Trainee | Sep 2025 – Jan 2026</em>
+            </div>
+            <ul>
+                <li>Selected for the government-funded Japanese OJT AI Training Program, <strong>Nippon AI Dojo 2025</strong> (<strong>2.6% acceptance rate</strong>) — <a href="https://www.bracu.ac.bd/news/brac-university-collaborates-japan-ai-training-program">[Official News]</a>.</li>
+                <li>Worked on an industry client project involving estimation of a target variable from 3D vision data, gaining hands-on experience in applied AI R&D workflows, including problem analysis, model development, experimentation, and evaluation.</li>
+                <li>Collaborated with a team of trainees in an industry-oriented AI development environment; received <strong>top recognition</strong> in both interim and final project report presentations.</li> 
+                <li>Gained practical exposure to industrial AI development processes, including technical investigation, AI model licensing, data security, and communicating experimental results to R&D stakeholders.</li>
+            </ul>
+        </div>
+
+        <div class="card timeline-item">
+            <div class="role-header">
+                <span class="role-company">Chowa Giken Corporation, Department of R&D</span>, Japan (Remote Job)
+                <em class="role-meta">ML Research Engineer Intern | June 2026 – Jan 2027</em>
+            </div>
+
+            <div class="subrole-grid">
+                <div class="subrole-box">
+                    <h4>Government-funded Project</h4>    
+                    <ul>
+                        <li> <strong>Support Mentor (Teaching Assistant)</strong> for Nippon AI Dojo 2026 (AI Human Resource Development Program), subsidized by the Ministry of Economy, Trade and Industry (METI, JAPAN).</li>
+                        <li> Mentoring trainees by providing technical guidance, reviewing assignments, and supporting hands-on machine learning projects. </li>  
+                    </ul>
+                </div>
+
+                <div class="subrole-box">
+                    <h4>Client Project</h4> 
+                    <ul>
+                        <li>Role involves Applied AI R&D responsibilities, including developing machine learning models, conducting experimental evaluations, optimizing model performance, and collaborating on real-world AI solutions.</li>
+                        <li>Project 1: Involving data manipulation, sample size calculation and operations research, feature engineering, and statistical modeling tasks for a racehorse breeding farm.</li>
+                    </ul>
+                </div>
+
+                <div class="subrole-box span-2">
+                    <h4>Corporate Training</h4> 
+                    <ul>
+                        <li>Enrolled in a course titled "Business Skills for New Professionals" by GLOBIS Unlimited, a premium business e-learning platform powered directly by the curriculum of <strong>GLOBIS University</strong> (Japan's largest and top-ranked business school). </li>
+                        <li>Acquired business foundations including logical thinking, structured business writing, and effective professional communication tailored for the corporate ecosystem.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Awards, Leadership & Recognition -->
 <section id="awards">
     <h2>Awards, Leadership & Recognition</h2>
 
-    <ul>
-        <li>
+    <ul class="awards-grid">
+        <li class="award-card">
             <strong>Best Group, Nippon AI Dojo 2025:</strong>
             Awarded Best Group for achieving the highest evaluation scores in both interim and final project progress presentations, as assessed by evaluators from Chowa Giken Corporation and Japanese government representatives.
         </li>
 
-        <li>
+        <li class="award-card">
             <strong>Undergraduate Thesis Exhibition Selection (2026):</strong>
             Ranked 29th among the top 30 theses recommended for exhibition based on novelty and clarity by CSE Department, BRAC University.
         </li>
         
-        <li>
+        <li class="award-card">
             <strong>Instructor, Asia Pacific Olympiad in Artificial Intelligence (APOAI) 2026, China:</strong>
             Invited by the BRAC University CSE Department to deliver a Machine Learning session alongside faculty members, following a professor's recognition of my <a href="#educational">Educational Resources</a>.
         </li>
 
-        <li>
+        <li class="award-card">
+            <strong>Founder, <a href="https://epochone.social/" target="_blank" rel="noopener noreferrer">Epoch One</a> (BRACU Independent AI Community):</strong>
+            Launched a pilot AI community to strengthen long-term AI talent development in Bangladesh. Supervised two papers published at IEEE conferences.
+        </li>
+
+        <li class="award-card span-2">
             <strong>Peer Reviewer:</strong>
             Reviewed five invited manuscripts for internationally recognized journals:
-            <ul>
+            <ul class="reviewer-list">
                 <li> 
                     <strong>Scientific Reports</strong> (Nature Portfolio) —
                     Impact Factor: <strong> 4.9</strong> | Quartile: <strong>Q1</strong>
@@ -197,147 +1005,107 @@
                 </li>
             </ul>
         </li>
-        
-        <li>
-            <strong>Founder, <a href="https://epochone.social/" target="_blank" rel="noopener noreferrer">Epoch One</a> (BRACU Independent AI Community):</strong>
-            Launched a pilot AI community to strengthen long-term AI talent development in Bangladesh. Supervised two papers published at IEEE conferences.
-        </li>
 
-        <li>
+        <li class="award-card">
             <strong>Top 3 Learner, BRACU DataCamp Classroom (2024–2026):</strong>
             Completed 60+ courses across Machine Learning Scientist and Statistician learning tracks.
         </li>
 
-        <li>
+        <li class="award-card">
             <strong>Contributor Award, Bengali Wikipedia (2021):</strong>
             Recognized for authoring articles that enrich Bengali Wikipedia.
         </li>
 
-        <li>
+        <li class="award-card span-2">
             <strong>Identified Expert, Scipinion:</strong>
             Invited to join the expert network as a recognized expert in Applied AI in Healthcare by Scipinion, a US-based scientific consultancy organization.
         </li>
-
-        
     </ul>
 </section>
 
-
+<!-- Educational Resources -->
 <section id="educational">
     <h2>Educational Resources</h2>
-    <ul>
-        <li>
+    <ul class="edu-list">
+        <li class="card">
             <strong>Core Python Programming and Problem Analysis (2022)</strong> –
             Authored a Python programming guidebook used by students at BRAC University.
-            <a href="https://www.academia.edu/98898456/Core_Python_Programming_and_Problem_Analysis" target="_blank">Read Book</a>
+            <br>
+            <span class="edu-links">
+                <a href="https://www.academia.edu/98898456/Core_Python_Programming_and_Problem_Analysis" target="_blank">Read Book</a>
+            </span>
         </li>
 
-        <li>
+        <li class="card">
             <strong>Data Science, Statistics & Biostatistics Learning Resources (2025)</strong> –
             Produced educational video lectures and study materials covering Artificial Intelligence, Data Science, Statistics, and Biostatistics, used by students.
             <br>
-            <a href="https://www.youtube.com/@datanerdStealth/videos" target="_blank">Watch Videos</a> |
-            <a href="https://www.academia.edu/165346692/BRAC_University_Statistics_STA201_BTE317_PHR211_Guide" target="_blank">Biostatistics Materials</a> |
-            <a href="https://www.academia.edu/165346725/BRACU_STA201_Guide_Elements_of_Statistics_and_Probability" target="_blank">Statistics Materials</a>
+            <span class="edu-links">
+                <a href="https://www.youtube.com/@datanerdStealth/videos" target="_blank">Watch Videos</a> |
+                <a href="https://www.academia.edu/165346692/BRAC_University_Statistics_STA201_BTE317_PHR211_Guide" target="_blank">Biostatistics Materials</a> |
+                <a href="https://www.academia.edu/165346725/BRACU_STA201_Guide_Elements_of_Statistics_and_Probability" target="_blank">Statistics Materials</a>
+            </span>
         </li>
-        <li>[Signing in to Academia.edu may be required to access the contents]</li>
+        <li class="edu-note">[Signing in to Academia.edu may be required to access the contents]</li>
     </ul>
 </section>
-</section>
-
 
 <!-- Technical Skills -->
-
 <section id="skills">
     <h2>Technical Skills</h2>
 
-<ul>
-    <li><strong>Languages:</strong> Python, R, SQL, Julia</li>
-    <li><strong>Machine Learning:</strong> Scikit-learn, TensorFlow/Keras, Explainable AI (SHAP), Counterfactuals (DiCE)</li>
-    <li><strong>Data Science:</strong> Experimental Designing, Statistical Analysis, Applied Statistics</li>
-    <li><strong>GenAI & NLP:</strong> RAG, Embeddings, Prompt Engineering</li>
-    <li><strong>MLOps:</strong> Drift Detection</li>
-    <li><strong>Development:</strong> Streamlit, Render, Git</li>
-</ul>
+    <ul class="skills-grid">
+        <li><strong>Languages:</strong> Python, R, SQL, Julia</li>
+        <li><strong>Machine Learning:</strong> Scikit-learn, TensorFlow/Keras, Explainable AI (SHAP), Counterfactuals (DiCE)</li>
+        <li><strong>Data Science:</strong> Experimental Designing, Statistical Analysis, Applied Statistics</li>
+        <li><strong>GenAI & NLP:</strong> RAG, Embeddings, Prompt Engineering</li>
+        <li><strong>MLOps:</strong> Drift Detection</li>
+        <li><strong>Development:</strong> Streamlit, Render, Git</li>
+    </ul>
 
-<!-- Skills Declaration -->
-<section id="skills-declaration">
-    <h3>Transparency Declaration</h3>
-    <p>
-        I use LLMs as an AI-assisted development and learning tool to accelerate
-        implementation, debugging, and exploration. My primary contribution lies
-        in problem formulation, optimization, algorithmic and statistical reasoning,
-        system design, and independent validation of AI-assisted implementations.
-    </p>
+    <!-- Skills Declaration -->
+    <section id="skills-declaration">
+        <h3>Transparency Declaration</h3>
+        <p>
+            I use LLMs as an AI-assisted development and learning tool to accelerate
+            implementation, debugging, and exploration. My primary contribution lies
+            in problem formulation, optimization, algorithmic and statistical reasoning,
+            system design, and independent validation of AI-assisted implementations.
+        </p>
+    </section>
 </section>
 
-</section>
+<!-- Education & Contact Row -->
+<div class="grid-2">
+    <!-- Education -->
+    <section id="education">
+        <h2>Education</h2>
+        <div class="card">
+            <p><strong>BRAC University</strong>, Dhaka, Bangladesh</p>
+            <p>Bachelor of Science in Computer Science &nbsp;|&nbsp; May 2022 – September 2027 (Expected)</p>
+            <ul>
+                <li><strong>Relevant Coursework:</strong> Thesis (4.0), Statistics & Probability (4.0), Python Programming (3.7), Data Science (3.7), Football Data Analytics (4.0)</li> 
+                <li><strong>CGPA:</strong> 2.78</li>
+            </ul>
+        </div>
+    </section>
 
-
-
-<!-- Selected Projects -->
-<section id="projects">
-    <h2>Selected Projects</h2>
-    <p><strong>Unbiased Journal Comparator Chatbot</strong> <a href="https://unbiased-research-comparator.streamlit.app/" target="_blank">[Live Demo]</a></p>
-    <ul>
-        <li>AI system comparing research papers via Llama3 and DeepSeek R1, ignoring author reputation bias.</li>
-    </ul>
-
-    <p><strong>JusticeNetBD</strong> <a href="https://justice-net-bd.streamlit.app/" target="_blank">[Live Demo]</a> <a href="http://dx.doi.org/10.2139/ssrn.5336711" target="_blank">[SSRN Preprint]</a> </p> 
-    <ul>
-        <li>Context-aware AI to enhance legal information access for Bangladeshi women via RAG.</li>
-    </ul>
-
-    <p><strong>Advanced AQI Forecasting System</strong> <a href="https://future-aqi-forecasting-system.streamlit.app/" target="_blank">[Live Demo]</a></p>
-    <ul>
-        <li>6-hour forward-looking air quality predictor with explainable AI (SHAP) capabilities.</li>
-    </ul>
-
-    <p><strong>Lung Cancer Prognosis System (Bengali UI)</strong> <a href="https://lung-cancer-predictor-random-forest-model.streamlit.app/" target="_blank">[Live Demo]</a></p>
-    <ul>
-        <li>Accessibility-focused ML prediction system designed for Bengali-speaking users.</li>
-    </ul>
-
-    <p><strong>Warning System for Harassment</strong> <a href="https://lgboost-women-safety-predictor.streamlit.app/" target="_blank">[Live Demo]</a></p>
-    <ul>
-        <li>Prototype safety risk classifier using synthetic data generation and SHAP for model interpretation.</li>
-    </ul>
-</section>
-
-<!-- Current Major Works -->
-<section id="current">
-    <h2>Undergraduate Thesis</h2>
-    <ul>
-        
-        <li>Developed SABA-Net, a lightweight vision model designed to reduce training energy consumption and associated CO₂ emissions compared with pre-training-based architectures.</li>
-        <li>Designed SABA-Net for CPU-based deployment, with a focus on Sustainable and Green AI. </li>
-        <li>[Working Paper Available Upon Request]</li>
-    </ul>
-</section>
-
-<!-- Education -->
-<section id="education">
-    <h2>Education</h2>
-    <p><strong>BRAC University</strong>, Dhaka, Bangladesh</p>
-    <p>Bachelor of Science in Computer Science &nbsp;|&nbsp; May 2022 – September 2027 (Expected)</p>
-    <ul>
-        <li><strong>Relevant Coursework:</strong> Thesis (4.0), Statistics & Probability (4.0), Python Programming (3.7), Data Science (3.7), Football Data Analytics (4.0)</li> 
-        <li><strong>CGPA:</strong> 2.78</li>
-        
-    </ul>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-    <h2>Contact</h2>
-    <p>📧 <a href="mailto:simanto.alt@gmail.com">simanto.alt@gmail.com</a></p>
-    <p>🌐 
-        <a href="https://github.com/SakibHasanSimanto" target="_blank">GitHub</a> · 
-        <a href="https://linkedin.com/in/kazisakibhasan" target="_blank">LinkedIn</a> · 
-        <a href="https://scholar.google.com/citations?user=OuAi-swAAAAJ&hl=en" target="_blank">Google Scholar</a>
-    </p>
-    <li>To verify claims and to get access to relevant documents for verification, kindly contact me or the respective institutions.</li>
-</section>
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="card">
+            <p>📧 <a href="mailto:simanto.alt@gmail.com">simanto.alt@gmail.com</a></p>
+            <p>🌐 
+                <a href="https://github.com/SakibHasanSimanto" target="_blank">GitHub</a> · 
+                <a href="https://linkedin.com/in/kazisakibhasan" target="_blank">LinkedIn</a> · 
+                <a href="https://scholar.google.com/citations?user=OuAi-swAAAAJ&hl=en" target="_blank">Google Scholar</a>
+            </p>
+            <ul class="contact-note">
+                <li>To verify claims and to get access to relevant documents for verification, kindly contact me or the respective institutions.</li>
+            </ul>
+        </div>
+    </section>
+</div>
 
 </main>
 
